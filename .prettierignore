@@ -1,0 +1,9 @@
+.idea
+.devcontainer
++# Add files here to ignore them from prettier formatting
+
+# Regular paths
+**/.git
+**/node_modules
+/dist
+

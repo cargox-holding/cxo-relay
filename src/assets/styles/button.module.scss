@@ -1,0 +1,44 @@
+@import 'styles/variables';
+
+/************************/
+/* BUTTON */
+/************************/
+
+.button {
+  background-color: $color-secondary;
+  border: none;
+  border-radius: $default-border-radius;
+  padding: $small-spacing $default-spacing;
+  color: white;
+  font-size: $xlarge-font-size;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.buttonGreen {
+  background-color: $color-green;
+
+  &::before {
+    background: url('play.svg') no-repeat center center;
+    position: relative;
+    content: '';
+    width: $xlarge-font-size;
+    height: $xlarge-font-size;
+    margin-right: $small-spacing;
+  }
+}
+
+.buttonRed {
+  background-color: $color-red;
+
+  &::before {
+    background: url('stop.svg') no-repeat center center;
+    position: relative;
+    content: '';
+    width: $xlarge-font-size;
+    height: $xlarge-font-size;
+    margin-right: $small-spacing;
+  }
+}

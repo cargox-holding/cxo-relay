@@ -1,0 +1,21 @@
+@import 'styles/variables';
+
+.logEntry {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  & span {
+    margin-right: $default-spacing;
+  }
+
+  strong {
+    word-break: break-all;
+    white-space: nowrap;
+  }
+
+  .errorLog {
+    color: red;
+  }
+}

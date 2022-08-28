@@ -1,0 +1,120 @@
+@import 'variables';
+
+body,
+html {
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+
+/************************/
+/* APP */
+/************************/
+
+.app {
+  max-width: 700px;
+  width: 100%;
+  padding: $xlarge-spacing 0;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.logo {
+  display: block;
+  margin: 0 auto $large-spacing auto;
+  width: 200px;
+}
+
+/************************/
+/* FORMS */
+/************************/
+
+.advancedSettings {
+  background: none;
+  border: none;
+  border-top: 1px solid $color-gray-300;
+  width: 100%;
+  padding: $small-spacing 0;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+/************************/
+/* RUN CONTAINER */
+/************************/
+
+.runContainer {
+  background-color: $color-gray-100;
+  border-radius: $default-border-radius;
+  padding: $large-spacing;
+}
+
+.twoColumns {
+  display: flex;
+  align-items: stretch;
+  margin-bottom: $large-spacing;
+}
+
+.code {
+  display: block;
+  font-size: $small-font-size;
+  margin-bottom: $large-spacing;
+}
+
+/************************/
+/* ETH ADDRESS */
+/************************/
+
+.ethAddress {
+  padding: $xsmall-spacing;
+  background-color: $color-gray-100;
+  border-radius: $default-border-radius;
+  margin-bottom: $large-spacing;
+}
+
+/************************/
+/* CUSTOM SCROLLBAR */
+/************************/
+
+/* The emerging W3C standard that is currently Firefox-only */
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: fade(black, 20%) transparent;
+}
+
+/* Works on Chrome/Edge/Safari */
+
+*::-webkit-scrollbar {
+  width: 6px;
+}
+
+*::-webkit-scrollbar:horizontal {
+  height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: $color-gray-200;
+  border-radius: 3px;
+  transition: all $default-animation;
+
+  &:hover {
+    background-color: rgba(black, 40%);
+  }
+}

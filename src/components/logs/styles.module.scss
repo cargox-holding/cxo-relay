@@ -1,0 +1,9 @@
+@import 'styles/variables';
+
+.logs {
+  display: block;
+  font-size: $small-font-size;
+  margin-bottom: $large-spacing;
+  overflow-y: auto;
+  height: 500px;
+}

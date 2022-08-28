@@ -1,0 +1,33 @@
+@import 'styles/variables';
+
+.errorFallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  flex: 1 1 auto;
+
+  h1 {
+    color: $color-red;
+    font-size: $large-font-size;
+  }
+
+  strong {
+    color: $color-red;
+  }
+}
+
+.message {
+  margin: 0 0 $xxxlarge-spacing 0;
+  background-color: fade-out($color-red,.95);
+  display: inline-block;
+  padding: $small-spacing;
+  border-radius: $default-border-radius;
+  color: $color-red;
+}
+
+.graphic {
+  margin-bottom: $xxlarge-spacing;
+  width: 300px;
+}

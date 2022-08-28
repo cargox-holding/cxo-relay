@@ -1,0 +1,28 @@
+@import 'styles/variables';
+
+.balance {
+  width: 50%;
+  background-color: $color-primary;
+  color: white;
+  border-radius: $default-border-radius;
+  padding: $default-spacing;
+  text-align: left;
+  box-sizing: border-box;
+
+  &:first-of-type {
+    margin-right: $default-spacing;
+  }
+
+  strong {
+    display: flex;
+    font-size: $xxlarge-font-size;
+    color: $color-secondary;
+
+    span:first-of-type {
+      text-overflow: ellipsis;
+      display: inline-block;
+      overflow: hidden;
+      margin-right: $xxxsmall-spacing;
+    }
+  }
+}

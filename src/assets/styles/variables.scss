@@ -1,0 +1,64 @@
+/************************/
+/* FONT SIZE */
+/************************/
+
+$xxsmall-font-size: 10px;
+$xsmall-font-size: 12px;
+$small-font-size: 14px;
+$default-font-size: 16px;
+$large-font-size: 18px;
+$xlarge-font-size: 22px;
+$xxlarge-font-size: 26px;
+$xxxlarge-font-size: 40px;
+$huge-font-size: 72px;
+
+/************************/
+/* ANIMATIONS */
+/************************/
+
+$default-animation: 300ms cubic-bezier(0.2, 1, 0.68, 0.99);
+$default-animation-length: 300ms;
+
+/************************/
+/* SPACING */
+/************************/
+
+$tiny-spacing: 2px;
+$xxxsmall-spacing: 4px;
+$xxsmall-spacing: 6px;
+$xsmall-spacing: 10px;
+$small-spacing: 15px;
+$default-spacing: 20px;
+$large-spacing: 25px;
+$xlarge-spacing: 30px;
+$xxlarge-spacing: 40px;
+$xxxlarge-spacing: 50px;
+$huge-spacing: 75px;
+
+/* BORDER RADIUS */
+
+$larger-border-radius: 25px;
+$large-border-radius: 15px;
+$default-border-radius: 8px;
+$small-border-radius: 4px;
+$smaller-border-radius: 2px;
+
+/************************/
+/* COLORS */
+/************************/
+
+$color-primary: hsla(224, 22%, 20%, 1);
+$color-secondary: hsla(44, 100%, 48%, 1.0);
+$color-green: hsla(151, 84%, 34%, 1.0);
+$color-orange: hsla(44, 100%, 48%, 1.0);
+$color-red: hsla(5, 70%, 54%, 1.0);
+
+$color-gray-100: hsla(223, 23%, 96%, 1); /* LIGHTER */
+$color-gray-200: hsla(229, 18%, 88%, 1);
+$color-gray-300: hsla(227, 19%, 74%, 1);
+$color-gray-400: hsla(225, 18%, 62%, 1);
+$color-gray: hsla(225, 19%, 50%, 1); /* DEFAULT */
+$color-gray-600: hsla(225, 20%, 39%, 1);
+$color-gray-700: hsla(225, 19%, 33%, 1);
+$color-gray-800: hsla(224, 20%, 26%, 1);
+$color-gray-900: hsla(226, 20%, 20%, 1); /* DARKER */

@@ -1,0 +1,27 @@
+@import 'styles/variables';
+
+.dotsLoader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 10px;
+  font-size: $small-font-size;
+
+  &::after {
+    content: ' .';
+    animation: dots-loader 2s infinite;
+    position: absolute;
+    margin-left: 2px;
+  }
+}
+
+@keyframes dots-loader {
+  0% { content: ' '; }
+  33% { content: ' .'; }
+  66% { content: ' ..'; }
+  100% { content: ' ...'; }
+}
