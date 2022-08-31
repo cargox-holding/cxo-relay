@@ -1,5 +1,6 @@
 import { ethers } from 'ethers';
 import { formatEther } from 'ethers/lib/utils';
+import { toFixed } from './utils/math';
 
 export function getSignatures(url: string, rewardRecipient = '') {
   const params = new URLSearchParams({
@@ -15,7 +16,7 @@ export function getRelayConstants(url: string): Promise<RelayConstantsDto> {
 
 export function getBalance(wallet: ethers.Wallet) {
   return wallet.getBalance().then((balance) => {
-    return formatEther(balance);
+    return toFixed(formatEther(balance), 5);
   });
 }
 
@@ -29,6 +30,6 @@ export function getCXOBalance(
 ) {
   const contract = new ethers.Contract(cxoAddress, CXOABI, provider);
   return contract.balanceOf(userAddress).then((balance: string) => {
-    return formatEther(balance);
+    return toFixed(formatEther(balance), 3);
   });
 }
