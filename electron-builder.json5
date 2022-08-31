@@ -10,6 +10,7 @@
     output: 'release/${version}',
     buildResources: 'electron/resources'
   },
+  "afterSign": "scripts/notarize.js",
   files: ['dist'],
   win: {
     target: [
@@ -27,7 +28,10 @@
     deleteAppDataOnUninstall: false
   },
   mac: {
+    "hardenedRuntime": true,
     artifactName: '${productName}-Mac-${arch}-${version}-Installer.${ext}',
+    "entitlements": "build/entitlements.mac.plist",
+    "entitlementsInherit": "build/entitlements.mac.plist",
     "target": [
       {
         "target": "dmg",
