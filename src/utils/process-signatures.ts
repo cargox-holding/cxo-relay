@@ -92,7 +92,7 @@ export async function processSignatures({
         );
         break;
       }
-      writeLog.error('Cannot relay: ' + e);
+      writeLog.error('Cannot relay: ' + extractErrorMessage(e));
     } finally {
       RelayCache.markAsProcessed(signature.id);
     }
@@ -113,4 +113,15 @@ function signatureOrder(sig1: SignatureDto, sig2: SignatureDto) {
     return 1;
   }
   return 0;
+}
+
+function extractErrorMessage(e: any) {
+  let message = e.toString();
+  try {
+    message = `${e.reason} (${e.code})`;
+  } catch {
+    // We use dump the whole e obj as string
+  }
+
+  return message;
 }
