@@ -12,6 +12,8 @@ import { LogsContext } from '../context/logs';
 import { processSignatures } from './process-signatures';
 
 const DEFAULT_REFRESH_INTERVAL_MS = 60 * 1000;
+const RELAY_REFRESH_INTERVAL_MS = 20 * 1000;
+const BALANCE_REFRESH_INTERVAL_MS = 55 * 1000;
 
 export function useLocalStorage<T>(key: string, initialValue: T) {
   const [storedValue, setStoredValue] = React.useState<T>(() => {
@@ -56,7 +58,6 @@ export function useRelayConstants(relayConfig: RelayConfig) {
     RelayConstantsDto,
     string
   >(`${relayUrl}${constantsUrl}`, getRelayConstants, {
-    refreshInterval: DEFAULT_REFRESH_INTERVAL_MS,
     revalidateOnFocus: false,
   });
   return { relayConstants, relayConstantsError };
@@ -199,10 +200,7 @@ export function useRunner({
     }
 
     // Setup interval and run immediately
-    const fetchTimer = setInterval(
-      fetchAndProcess,
-      DEFAULT_REFRESH_INTERVAL_MS
-    );
+    const fetchTimer = setInterval(fetchAndProcess, RELAY_REFRESH_INTERVAL_MS);
     fetchAndProcess();
 
     return () => {
@@ -232,7 +230,7 @@ export function useBalance({ wallet }: BalanceParams) {
     wallet ? [wallet] : null,
     getBalance,
     {
-      refreshInterval: DEFAULT_REFRESH_INTERVAL_MS,
+      refreshInterval: BALANCE_REFRESH_INTERVAL_MS,
     }
   );
   return { balance: data, error };
@@ -254,7 +252,7 @@ export function useCxoBalance({
     hasNeededInput ? [provider, relayConstants.cxo_address, userAddress] : null,
     getCXOBalance,
     {
-      refreshInterval: DEFAULT_REFRESH_INTERVAL_MS,
+      refreshInterval: BALANCE_REFRESH_INTERVAL_MS,
     }
   );
   return { balance: data, error };
