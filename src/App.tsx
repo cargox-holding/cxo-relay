@@ -1,22 +1,14 @@
 /* eslint-disable no-irregular-whitespace */
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import styles from 'styles/app.module.scss';
 import { useLocalStorage } from './utils/hooks';
 import ProcessScreen from './ProcessScreen';
-import FormScreen from './FormScreen';
+import FormScreen, { FormValues } from './FormScreen';
 import { ErrorFallback } from './components/error-fallback';
 
-type FormValues = {
-  privateKeyOrMnemonic: string;
-  rewardCxoAddress: string;
-  rpcAddress: string;
-  relayUrl: string;
-  gasPrice: string;
-  gasLimit: string;
-};
-
 const App = () => {
+  const autostartChecked = useRef<boolean>(false);
   const [running, setRunning] = useState(false);
 
   // We store the user's submitted form values
@@ -29,6 +21,7 @@ const App = () => {
       relayUrl: '',
       gasPrice: '',
       gasLimit: '',
+      autostart: 'false',
     }
   );
 
@@ -45,11 +38,17 @@ const App = () => {
     <div className={styles.app}>
       <img className={styles.logo} src="CXO-Relay-logo.svg" />
       <ErrorBoundary FallbackComponent={ErrorFallback} onReset={stopProcessing}>
-        {!running ? (
-          <FormScreen initialValues={savedValues} onStart={startProcessing} />
-        ) : (
-          <ProcessScreen {...savedValues} onStop={stopProcessing} />
-        )}
+        <section className={styles.section}>
+          {!running ? (
+            <FormScreen
+              initialValues={savedValues}
+              onStart={startProcessing}
+              autostartChecked={autostartChecked}
+            />
+          ) : (
+            <ProcessScreen {...savedValues} onStop={stopProcessing} />
+          )}
+        </section>
       </ErrorBoundary>
     </div>
   );

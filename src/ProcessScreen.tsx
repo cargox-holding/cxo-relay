@@ -82,7 +82,7 @@ const ProcessScreen = ({
   }
 
   return (
-    <section>
+    <>
       {loading ? (
         <Loader />
       ) : (
@@ -100,7 +100,7 @@ const ProcessScreen = ({
           </button>
         </div>
       )}
-    </section>
+    </>
   );
 };
 

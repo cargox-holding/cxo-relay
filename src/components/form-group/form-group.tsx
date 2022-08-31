@@ -1,5 +1,5 @@
 import styles from './styles.module.scss';
-import React from 'react';
+import React, { HTMLInputTypeAttribute } from 'react';
 import clsx from 'clsx';
 import { UseFormRegisterReturn } from 'react-hook-form';
 
@@ -11,6 +11,7 @@ interface FormGroupProps {
   inputProps: UseFormRegisterReturn;
   dirty: boolean;
   value: string;
+  type?: HTMLInputTypeAttribute;
 }
 
 export function FormGroup({
@@ -21,6 +22,7 @@ export function FormGroup({
   inputProps,
   dirty,
   value,
+  type = 'text',
 }: FormGroupProps) {
   const valid = !errorMessage;
   const displayValidation = dirty || value || !valid;
@@ -31,10 +33,19 @@ export function FormGroup({
         displayValidation ? (valid ? styles.valid : styles.invalid) : {}
       )}
     >
-      <label htmlFor={name}>{label}</label>
-      <div className={styles.formField}>
-        <input id={name} type="text" {...inputProps} />
-      </div>
+      {type === 'checkbox' ? (
+        <div className={styles.checkboxField}>
+          <input id={name} type={type} {...inputProps} />{' '}
+          <label htmlFor={name}>{label}</label>
+        </div>
+      ) : (
+        <>
+          <label htmlFor={name}>{label}</label>
+          <div className={styles.formField}>
+            <input id={name} type={type} {...inputProps} />
+          </div>
+        </>
+      )}
       {helpText && <div className={styles.formHelp}>{helpText}</div>}
       {errorMessage && <div className={styles.formError}>{errorMessage}</div>}
     </div>

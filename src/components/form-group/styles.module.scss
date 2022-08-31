@@ -46,6 +46,14 @@
     }
   }
 
+  .checkboxField {
+    display: flex;
+    flex-direction: row;
+    label {
+      margin-left: $xsmall-spacing;
+    }
+  }
+
   &.invalid {
     color: $color-red;
 
