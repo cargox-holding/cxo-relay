@@ -9,7 +9,7 @@
   "main": "dist/electron/main/index.js",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build && electron-builder",
+    "build": "tsc && vite build",
     "prepare": "husky install",
     "test": "jest"
   },

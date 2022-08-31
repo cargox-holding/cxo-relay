@@ -20,4 +20,5 @@ yarn dev
 
 ```
 yarn build
+electron-builder
 ```
