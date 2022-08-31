@@ -8,39 +8,47 @@
   asar: true,
   directories: {
     output: 'release/${version}',
-    buildResources: 'electron/resources',
+    buildResources: 'electron/resources'
   },
   files: ['dist'],
   win: {
     target: [
       {
         target: 'nsis',
-        arch: ['x64'],
-      },
+        arch: ['x64']
+      }
     ],
-    artifactName: '${productName}-Windows-${version}-Setup.${ext}',
+    artifactName: '${productName}-Windows-${version}-Setup.${ext}'
   },
   nsis: {
     oneClick: false,
     perMachine: false,
     allowToChangeInstallationDirectory: true,
-    deleteAppDataOnUninstall: false,
+    deleteAppDataOnUninstall: false
   },
   mac: {
     artifactName: '${productName}-Mac-${arch}-${version}-Installer.${ext}',
+    "target": [
+      {
+        "target": "dmg",
+        "arch": [
+          "x64",
+          "arm64"
+        ]
+      }
+    ]
+
+  },
+  linux: {
   "target": [
     {
-      "target": "dmg",
+      "target": "AppImage",
       "arch": [
         "x64",
         "arm64"
       ]
     }
   ],
-
-  },
-  linux: {
-    target: ['AppImage'],
-    artifactName: '${productName}-Linux-${version}.${ext}',
-  },
+    artifactName: '${productName}-Linux-${arch}-${version}.${ext}'
+  }
 }
