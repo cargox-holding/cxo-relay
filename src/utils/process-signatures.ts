@@ -84,8 +84,6 @@ export async function processSignatures({
         callOptions
       );
       writeLog.info('Transaction hash: ' + (tx as Transaction).hash);
-
-      RelayCache.markAsProcessed(signature.id);
     } catch (e) {
       const error = e as EthersError;
       if (error.code == 'NETWORK_ERROR') {
@@ -95,6 +93,8 @@ export async function processSignatures({
         break;
       }
       writeLog.error('Cannot relay: ' + e);
+    } finally {
+      RelayCache.markAsProcessed(signature.id);
     }
   }
   writeLog.info('Done!');
