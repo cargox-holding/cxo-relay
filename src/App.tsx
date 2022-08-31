@@ -21,7 +21,7 @@ const App = () => {
       relayUrl: '',
       gasPrice: '',
       gasLimit: '',
-      autostart: 'false',
+      autostart: false,
     }
   );
 

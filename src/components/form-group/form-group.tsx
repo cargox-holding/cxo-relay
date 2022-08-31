@@ -10,7 +10,7 @@ interface FormGroupProps {
   errorMessage?: string;
   inputProps: UseFormRegisterReturn;
   dirty: boolean;
-  value: string;
+  value: string | boolean;
   type?: HTMLInputTypeAttribute;
 }
 

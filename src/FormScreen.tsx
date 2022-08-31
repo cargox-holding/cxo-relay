@@ -22,7 +22,7 @@ export type FormValues = {
   relayUrl: string;
   gasPrice: string;
   gasLimit: string;
-  autostart: string;
+  autostart: boolean;
 };
 
 type Props = {
@@ -101,8 +101,8 @@ const FormScreen = ({ initialValues, onStart, autostartChecked }: Props) => {
             'Enter the private key or mnemonic phrase for the wallet that holds MATIC that will be spent to relay transactions.',
           options: {
             required: 'Please enter private key or mnemonic',
-            validate: (value: string) =>
-              isValidMnemonicOrPrivateKey(value) !== 'invalid' ||
+            validate: (value) =>
+              isValidMnemonicOrPrivateKey(value as string) !== 'invalid' ||
               'Invalid private key or mnemonic',
           },
         })}
@@ -118,8 +118,8 @@ const FormScreen = ({ initialValues, onStart, autostartChecked }: Props) => {
             'Enter the address where CXO are stored on the Polygon network (and where the reward will be sent to).',
           options: {
             required: 'Please enter a CXO address',
-            validate: (value: string) =>
-              isAddress(value) || 'Please provide a valid address',
+            validate: (value) =>
+              isAddress(value as string) || 'Please provide a valid address',
           },
         })}
       />
@@ -130,7 +130,8 @@ const FormScreen = ({ initialValues, onStart, autostartChecked }: Props) => {
           helpText: 'Enter the Polygon node RPC URL.',
           options: {
             required: 'Please enter a URL',
-            validate: (value: string) => isURL(value) || 'Provide a valid URL',
+            validate: (value) =>
+              isURL(value as string) || 'Provide a valid URL',
           },
         })}
       />
@@ -141,7 +142,8 @@ const FormScreen = ({ initialValues, onStart, autostartChecked }: Props) => {
           helpText: 'Enter the URL of the API endpoint to retrieve relay data',
           options: {
             required: 'Please enter a URL',
-            validate: (value: string) => isURL(value) || 'Provide a valid URL',
+            validate: (value) =>
+              isURL(value as string) || 'Provide a valid URL',
           },
         })}
       />
