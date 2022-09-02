@@ -34,8 +34,8 @@
     "@typescript-eslint/eslint-plugin": "^5.32.0",
     "@typescript-eslint/parser": "^5.32.0",
     "@vitejs/plugin-react": "^2.0.0",
-    "electron": "^19.0.9",
-    "electron-builder": "^23.1.0",
+    "electron": "^20.0.0",
+    "electron-builder": "^23.3.3",
     "electron-devtools-installer": "^3.2.0",
     "electron-notarize": "^1.2.1",
     "eslint": "^8.21.0",
@@ -58,6 +58,9 @@
     "vite": "^3.0.2",
     "vite-plugin-electron": "^0.8.3",
     "whatwg-fetch": "^3.6.2"
+  },
+  "resolutions": {
+    "got": "^11.8.5"
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [
