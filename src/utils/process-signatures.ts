@@ -1,3 +1,4 @@
+import { getGasPrice } from '../api';
 import { ethers, Transaction } from 'ethers';
 import { parseUnits } from 'ethers/lib/utils';
 import { LogsContextInterface } from '../context/logs';
@@ -45,6 +46,13 @@ export async function processSignatures({
     callOptions = {
       gasPrice: parseUnits(gasPrice, 'gwei'),
       gasLimit: parseUnits(gasLimit, 'gwei'),
+    };
+  } else {
+    writeLog.info('Fetching gas price information...');
+    const gasPrice = await getGasPrice();
+    callOptions = {
+      maxFeePerGas: parseUnits(gasPrice.result.SafeGasPrice, 'gwei'),
+      maxPriorityFeePerGas: parseUnits(gasPrice.result.SafeGasPrice, 'gwei'),
     };
   }
 

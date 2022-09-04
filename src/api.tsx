@@ -33,3 +33,9 @@ export function getCXOBalance(
     return toFixed(formatEther(balance), 3);
   });
 }
+
+export function getGasPrice() {
+  return fetch(
+    'https://api.polygonscan.com/api?module=gastracker&action=gasoracle'
+  ).then((res) => res.json());
+}
