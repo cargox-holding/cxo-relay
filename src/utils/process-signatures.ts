@@ -53,11 +53,19 @@ export async function processSignatures({
     if (relayUrl.endsWith('/')) {
       gasUrl = 'gas/';
     }
-    const gasPrice = await getGasPrice(`${relayUrl}${gasUrl}`);
-    callOptions = {
-      maxFeePerGas: parseUnits(gasPrice.result.SafeGasPrice, 'gwei'),
-      maxPriorityFeePerGas: parseUnits(gasPrice.result.SafeGasPrice, 'gwei'),
-    };
+    try {
+      const gasPrice = await getGasPrice(`${relayUrl}${gasUrl}`);
+      callOptions = {
+        maxFeePerGas: parseUnits(gasPrice.result.SafeGasPrice, 'gwei'),
+        maxPriorityFeePerGas: parseUnits(gasPrice.result.SafeGasPrice, 'gwei'),
+      };
+    } catch {
+      writeLog.info('Failed to fetch gas price information!');
+      callOptions = {
+        maxFeePerGas: parseUnits('50', 'gwei'),
+        maxPriorityFeePerGas: parseUnits('50', 'gwei'),
+      };
+    }
   }
 
   // We sort the signatures by times_shown (ascending)
