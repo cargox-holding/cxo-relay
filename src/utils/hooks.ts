@@ -138,7 +138,6 @@ type RunnerInput = {
   wallet: ethers.Wallet | null;
   provider: ethers.providers.Provider | null;
   gasPrice: string;
-  gasLimit: string;
 };
 
 export function useRunner({
@@ -147,7 +146,6 @@ export function useRunner({
   wallet,
   provider,
   gasPrice,
-  gasLimit,
 }: RunnerInput) {
   const { writeLog } = useLogs();
 
@@ -192,8 +190,8 @@ export function useRunner({
           wallet,
           provider,
           gasPrice,
-          gasLimit,
           writeLog,
+          relayUrl,
           shouldCancel,
         });
         inProgress.current = false;

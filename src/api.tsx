@@ -34,8 +34,6 @@ export function getCXOBalance(
   });
 }
 
-export function getGasPrice() {
-  return fetch(
-    'https://api.polygonscan.com/api?module=gastracker&action=gasoracle'
-  ).then((res) => res.json());
+export function getGasPrice(url: string) {
+  return fetch(url).then((res) => res.json());
 }

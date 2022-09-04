@@ -20,7 +20,6 @@ const App = () => {
       rpcAddress: '',
       relayUrl: '',
       gasPrice: '',
-      gasLimit: '',
       autostart: false,
     }
   );

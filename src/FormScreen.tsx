@@ -21,7 +21,6 @@ export type FormValues = {
   rpcAddress: string;
   relayUrl: string;
   gasPrice: string;
-  gasLimit: string;
   autostart: boolean;
 };
 
@@ -162,13 +161,6 @@ const FormScreen = ({ initialValues, onStart, autostartChecked }: Props) => {
               name: 'gasPrice',
               label: 'Custom gas price (in gwei)',
               helpText: 'Enter your custom gas price here.',
-            })}
-          />
-          <FormGroup
-            {...getFormGroupProps({
-              name: 'gasLimit',
-              label: 'Custom gas limit (in gwei)',
-              helpText: 'Enter your custom gas limit here.',
             })}
           />
           <FormGroup

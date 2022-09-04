@@ -11,8 +11,8 @@ type ProcessInput = {
   provider: ethers.providers.Provider | null;
   writeLog: LogsContextInterface['writeLog'];
   shouldCancel: React.MutableRefObject<boolean>;
+  relayUrl: string;
   gasPrice?: string;
-  gasLimit?: string;
 };
 
 type EthersError = {
@@ -25,8 +25,8 @@ export async function processSignatures({
   provider,
   writeLog,
   shouldCancel,
+  relayUrl,
   gasPrice,
-  gasLimit,
 }: ProcessInput) {
   if (!signatures) {
     writeLog.info('No signatures, canceling.');
@@ -42,14 +42,18 @@ export async function processSignatures({
   }
 
   let callOptions = {};
-  if (gasPrice && gasLimit) {
+  if (gasPrice) {
     callOptions = {
-      gasPrice: parseUnits(gasPrice, 'gwei'),
-      gasLimit: parseUnits(gasLimit, 'gwei'),
+      maxFeePerGas: parseUnits(gasPrice, 'gwei'),
+      gasLmaxPriorityFeePerGasimit: parseUnits(gasPrice, 'gwei'),
     };
   } else {
     writeLog.info('Fetching gas price information...');
-    const gasPrice = await getGasPrice();
+    let gasUrl = '/gas/';
+    if (relayUrl.endsWith('/')) {
+      gasUrl = 'gas/';
+    }
+    const gasPrice = await getGasPrice(`${relayUrl}${gasUrl}`);
     callOptions = {
       maxFeePerGas: parseUnits(gasPrice.result.SafeGasPrice, 'gwei'),
       maxPriorityFeePerGas: parseUnits(gasPrice.result.SafeGasPrice, 'gwei'),
