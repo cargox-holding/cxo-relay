@@ -1,0 +1,25 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "outDir": "dist-cli/",
+    "forceConsistentCasingInFileNames": false,
+    "baseUrl": ".",
+    "useDefineForClassFields": true,
+    "lib": ["DOM", "DOM.Iterable"],
+    "paths": {
+      "@/*": ["src/*"],
+      "styles/*": ["src/assets/styles/*"]
+    },
+    "allowJs": false,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "noEmit": false
+  },
+  "include": ["src"]
+}

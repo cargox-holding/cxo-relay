@@ -1,15 +1,10 @@
 /* eslint-disable no-irregular-whitespace */
-import React, {
-  HTMLInputTypeAttribute,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { HTMLInputTypeAttribute, useEffect, useState } from 'react';
 import styles from 'styles/app.module.scss';
 import button from 'styles/button.module.scss';
 import clsx from 'clsx';
 import { RegisterOptions, useForm } from 'react-hook-form';
-import { FormGroup } from './components/form-group';
+import { FormGroup } from './components/app/form-group';
 import { useLocalStorage } from './utils/hooks';
 import { isURL, isValidMnemonicOrPrivateKey } from './utils/validations';
 import { isAddress } from 'ethers/lib/utils';

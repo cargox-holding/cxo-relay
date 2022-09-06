@@ -30,13 +30,23 @@ function forwardToDevConsole(message: string, level: LogLevel) {
 }
 
 let logId = 0;
-function LogsProvider({ children }: { children: React.ReactNode }) {
+function LogsProvider({
+  children,
+  forwardToConsole = true,
+  tailSize,
+}: {
+  children: React.ReactNode;
+  forwardToConsole?: boolean;
+  tailSize?: number;
+}) {
   const [logs, setLogs] = React.useState<LogEntry[]>([]);
 
   function _appendLog(message: string, level: LogLevel) {
-    forwardToDevConsole(message, level);
+    if (forwardToConsole) {
+      forwardToDevConsole(message, level);
+    }
     setLogs((logs) => [
-      ...logs,
+      ...logs.slice(tailSize ? -tailSize : undefined),
       { id: logId++, timestamp: Date.now(), message, level },
     ]);
   }

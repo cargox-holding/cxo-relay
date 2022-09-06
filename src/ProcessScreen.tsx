@@ -1,8 +1,9 @@
 /* eslint-disable no-irregular-whitespace */
+import { useEffect } from 'react';
 import styles from 'styles/app.module.scss';
 import button from 'styles/button.module.scss';
 import clsx from 'clsx';
-import { Balance } from './components/balance';
+import { Balance } from './components/app/balance';
 import {
   useBalance,
   useCxoBalance,
@@ -13,9 +14,8 @@ import {
   useLogs,
 } from './utils/hooks';
 import { isValidMnemonicOrPrivateKey } from './utils/validations';
-import { Loader } from './components/loader';
-import { Logs } from './components/logs';
-import { useEffect } from 'react';
+import { Loader } from './components/app/loader';
+import { Logs } from './components/app/logs';
 
 type Props = {
   privateKeyOrMnemonic: string;

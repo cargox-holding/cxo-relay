@@ -1,7 +1,7 @@
 import styles from './styles.module.scss';
 import { LogMessage } from '../logMessage';
 import { useEffect, useRef } from 'react';
-import { useLogs } from '../../utils/hooks';
+import { useLogs } from '../../../utils/hooks';
 
 export function Logs() {
   const { logs } = useLogs();

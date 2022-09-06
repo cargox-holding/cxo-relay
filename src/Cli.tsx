@@ -1,0 +1,85 @@
+import React from 'react';
+import { Box, Text } from 'ink';
+import {
+  useBalance,
+  useCxoBalance,
+  useRelayConstants,
+  useRpcProvider,
+  useRunner,
+  useWallet,
+} from './utils/hooks';
+import { isValidMnemonicOrPrivateKey } from './utils/validations';
+import { Balance } from './components/cli/balance';
+import { Logs } from './components/cli/logs';
+
+type Props = {
+  privateKeyOrMnemonic: string;
+  relayUrl: string;
+  rpcAddress: string;
+  rewardCxoAddress: string;
+  gasPrice: string;
+};
+
+const App = ({
+  privateKeyOrMnemonic,
+  relayUrl,
+  rpcAddress,
+  rewardCxoAddress,
+  gasPrice = '',
+}: Props) => {
+  // These two hooks establish the provider and wallet objects that used throughout the component
+  const provider = useRpcProvider({ rpcAddress });
+  const wallet = useWallet({
+    privateKeyOrMnemonic,
+    type: isValidMnemonicOrPrivateKey(privateKeyOrMnemonic),
+    provider,
+  });
+  const loading = !provider || !wallet;
+
+  // This hook periodically checks for updated relay constants
+  const { relayConstants } = useRelayConstants({
+    relayUrl,
+  });
+
+  // This hook fetches the signatures data and handles running/cancelling the processing
+  useRunner({
+    relayUrl,
+    rewardRecipient: rewardCxoAddress,
+    wallet,
+    provider,
+    gasPrice,
+  });
+
+  // These two hooks periodically check the MATIC and CXO balances
+  const { balance: maticBalance } = useBalance({
+    wallet,
+  });
+  const { balance: cxoBalance } = useCxoBalance({
+    relayConstants,
+    provider,
+    userAddress: rewardCxoAddress,
+  });
+
+  if (loading) {
+    return <Text>Loading...</Text>;
+  }
+  return (
+    <Box flexDirection="column" marginLeft={2}>
+      <Box
+        borderStyle="single"
+        flexDirection="column"
+        width={80}
+        paddingLeft={2}
+        paddingTop={1}
+        paddingBottom={1}
+        paddingRight={2}
+      >
+        <Balance title="Matic balance" value={maticBalance} units="MATIC" />
+        <Balance title="CXO balance" value={cxoBalance} units="CXO" />
+      </Box>
+      <Logs />
+    </Box>
+  );
+};
+
+export default App;
