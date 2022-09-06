@@ -1,4 +1,4 @@
-import fetch from 'node-fetch';
+import fetch from './utils/fetch';
 import { ethers } from 'ethers';
 import { formatEther } from 'ethers/lib/utils';
 import { toFixed } from './utils/math';
