@@ -11,4 +11,5 @@ export default {
     '\\.scss$': 'identity-obj-proxy',
   },
   setupFilesAfterEnv: ['./jest.setup.ts'],
+  modulePathIgnorePatterns: ['<rootDir>/dist/', '<rootDir>/dist-cli/'],
 };

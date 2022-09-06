@@ -3,7 +3,7 @@ import React from 'react';
 import { render } from 'ink';
 import { Command } from 'commander';
 
-import Cli from './Cli';
+import Cli from './components/cli/Cli';
 import { LogsProvider } from './context/logs';
 
 const program = new Command();

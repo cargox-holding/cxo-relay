@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import styles from 'styles/app.module.scss';
 import button from 'styles/button.module.scss';
 import clsx from 'clsx';
-import { Balance } from './components/app/balance';
+import { Balance } from './balance';
 import {
   useBalance,
   useCxoBalance,
@@ -12,10 +12,10 @@ import {
   useWallet,
   useRunner,
   useLogs,
-} from './utils/hooks';
-import { isValidMnemonicOrPrivateKey } from './utils/validations';
-import { Loader } from './components/app/loader';
-import { Logs } from './components/app/logs';
+} from '../../utils/hooks';
+import { isValidMnemonicOrPrivateKey } from '../../utils/validations';
+import { Loader } from './loader';
+import { Logs } from './logs';
 
 type Props = {
   privateKeyOrMnemonic: string;

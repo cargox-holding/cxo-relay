@@ -7,10 +7,10 @@ import {
   useRpcProvider,
   useRunner,
   useWallet,
-} from './utils/hooks';
-import { isValidMnemonicOrPrivateKey } from './utils/validations';
-import { Balance } from './components/cli/balance';
-import { Logs } from './components/cli/logs';
+} from '../../utils/hooks';
+import { isValidMnemonicOrPrivateKey } from '../../utils/validations';
+import { Balance } from './balance';
+import { Logs } from './logs';
 
 type Props = {
   privateKeyOrMnemonic: string;

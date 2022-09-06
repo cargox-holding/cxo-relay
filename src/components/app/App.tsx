@@ -2,10 +2,10 @@
 import { useRef, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import styles from 'styles/app.module.scss';
-import { useLocalStorage } from './utils/hooks';
+import { useLocalStorage } from '../../utils/hooks';
 import ProcessScreen from './ProcessScreen';
 import FormScreen, { FormValues } from './FormScreen';
-import { ErrorFallback } from './components/app/error-fallback';
+import { ErrorFallback } from './error-fallback';
 
 const App = () => {
   const autostartChecked = useRef<boolean>(false);
