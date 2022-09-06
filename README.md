@@ -29,10 +29,17 @@ You can use the CXO relay also via its CLI
 
 ## CXO Relay CLI
 
-To install globally just run
+Install the latest version using npm
+
+```
+npm i -g cxo-relay
+```
+
+To install from source just run
 
 ```
 cd cxo-relay/
+yarn build-cli
 yarn add global file:$PWD
 ```
 
