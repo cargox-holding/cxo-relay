@@ -14,6 +14,7 @@ test('display --help', async () => {
     CXO relay CLI utility
 
     Options:
+      -V, --version           output the version number
       --key <keyOrMnemonic>   The private key or mnemonic phrase for the wallet
                               that holds MATIC that will be spent to relay
                               transactions
@@ -56,25 +57,25 @@ test('test missing args', async () => {
     await runCli(getArgs(2));
   } catch (e) {
     expect(e).toMatchInlineSnapshot(`
-    "error: required option '--relayUrl <url>' not specified
-    "
-  `);
+          "error: required option '--relayUrl <url>' not specified
+          "
+      `);
   }
   try {
     await runCli(getArgs(4));
   } catch (e) {
     expect(e).toMatchInlineSnapshot(`
-    "error: required option '--rpcUrl <url>' not specified
-    "
-  `);
+          "error: required option '--rpcUrl <url>' not specified
+          "
+      `);
   }
   try {
     await runCli(getArgs(6));
   } catch (e) {
     expect(e).toMatchInlineSnapshot(`
-    "error: required option '--rewardAddr <address>' not specified
-    "
-  `);
+          "error: required option '--rewardAddr <address>' not specified
+          "
+      `);
   }
 });
 

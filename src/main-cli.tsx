@@ -3,6 +3,7 @@ import React from 'react';
 import { render } from 'ink';
 import { Command } from 'commander';
 
+import { version } from '../package.json';
 import Cli from './components/cli/Cli';
 import { LogsProvider } from './context/logs';
 
@@ -10,6 +11,7 @@ const program = new Command();
 
 program
   .name('cxo-relay')
+  .version(version)
   .description('CXO relay CLI utility')
   .requiredOption(
     '--key <keyOrMnemonic>',
