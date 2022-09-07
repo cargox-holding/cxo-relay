@@ -9,9 +9,8 @@ import { LogsProvider } from './context/logs';
 const program = new Command();
 
 program
-  .name('cxo-relay-cli')
+  .name('cxo-relay')
   .description('CXO relay CLI utility')
-  .version('0.0.1')
   .requiredOption(
     '--key <keyOrMnemonic>',
     'The private key or mnemonic phrase for the wallet that holds MATIC that will be spent to relay transactions'
