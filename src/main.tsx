@@ -7,7 +7,7 @@ import { LogsProvider } from './context/logs';
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <LogsProvider>
+    <LogsProvider forwardToConsole={false} tailSize={1000}>
       <App />
     </LogsProvider>
   </React.StrictMode>
