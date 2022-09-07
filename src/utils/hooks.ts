@@ -11,7 +11,6 @@ import {
 import { LogsContext } from '../context/logs';
 import { processSignatures } from './process-signatures';
 
-const DEFAULT_REFRESH_INTERVAL_MS = 60 * 1000;
 const RELAY_REFRESH_INTERVAL_MS = 20 * 1000;
 const BALANCE_REFRESH_INTERVAL_MS = 55 * 1000;
 
