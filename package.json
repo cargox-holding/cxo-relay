@@ -2,7 +2,7 @@
   "name": "cxo-relay",
   "productName": "CXO Relayer",
   "private": false,
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "CXO Relayer App",
   "author": "CargoX Holding LTD",
   "license": "MIT",
