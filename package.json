@@ -8,7 +8,7 @@
   "license": "MIT",
   "main": "dist/electron/main/index.js",
   "bin": {
-    "cxo-relay": "dist-cli/main-cli.js"
+    "cxo-relay": "dist-cli/src/main-cli.js"
   },
   "files": [
     "dist-cli/*"
@@ -18,8 +18,8 @@
     "build": "tsc && vite build",
     "prepare": "husky install",
     "test": "jest",
-    "build-cli": "tsc --p ./tsconfig.cli.json && chmod +x dist-cli/main-cli.js",
-    "start-cli": "yarn build-cli && dist-cli/main-cli.js"
+    "build-cli": "tsc --p ./tsconfig.cli.json && chmod +x dist-cli/src/main-cli.js",
+    "start-cli": "yarn build-cli && dist-cli/src/main-cli.js"
   },
   "engines": {
     "node": ">=14.18.0"

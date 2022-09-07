@@ -7,7 +7,7 @@ type Options = {
 // Runs the CLI commad
 // Expects the source to be built already
 export function runCli(args: string[], options: Options = {}) {
-  const cxoRelayCmd = spawn('node', ['dist-cli/main-cli', ...args]);
+  const cxoRelayCmd = spawn('node', ['dist-cli/src/main-cli', ...args]);
   const promise = new Promise((resolve, reject) => {
     cxoRelayCmd.stderr.once('data', (err) => {
       reject(err.toString());
