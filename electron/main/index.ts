@@ -72,11 +72,10 @@ async function createWindow() {
   );
 
   win.webContents.session.webRequest.onHeadersReceived((details, callback) => {
+    const { responseHeaders } = details;
+    upsertKeyValue(responseHeaders, 'Access-Control-Allow-Origin', ['*']);
     callback({
-      responseHeaders: {
-        'Access-Control-Allow-Origin': ['*'],
-        ...details.responseHeaders,
-      },
+      responseHeaders,
     });
   });
 }
@@ -122,6 +121,18 @@ ipcMain.handle('open-win', (event, arg) => {
     childWindow.loadFile(indexHtml, { hash: arg });
   } else {
     childWindow.loadURL(`${url}/#${arg}`);
-    // childWindow.webContents.openDevTools({ mode: "undocked", activate: true })
   }
 });
+
+function upsertKeyValue(obj, keyToChange, value) {
+  const keyToChangeLower = keyToChange.toLowerCase();
+  for (const key of Object.keys(obj)) {
+    if (key.toLowerCase() === keyToChangeLower) {
+      // Reassign old key
+      obj[key] = value;
+      return;
+    }
+  }
+  // Insert at end if not among values
+  obj[keyToChange] = value;
+}

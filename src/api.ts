@@ -46,3 +46,13 @@ export type GasPriceDto = {
 export function getGasPrice(url: string) {
   return fetch(url).then((res) => res.json()) as Promise<GasPriceDto>;
 }
+
+export type LatestReleaseDto = {
+  tag_name: string;
+  target_commitish: string;
+  name: string;
+  // And many others, which are not relevant in this case
+};
+export function getLatestRelease(url: string) {
+  return fetch(url).then((res) => res.json()) as Promise<LatestReleaseDto>;
+}

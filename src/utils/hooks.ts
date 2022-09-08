@@ -4,8 +4,10 @@ import { ethers } from 'ethers';
 import {
   getBalance,
   getCXOBalance,
+  getLatestRelease,
   getRelayConstants,
   getSignatures,
+  LatestReleaseDto,
   RelayConstantsDto,
 } from '../api';
 import { LogsContext } from '../context/logs';
@@ -13,6 +15,7 @@ import { processSignatures } from './process-signatures';
 
 const RELAY_REFRESH_INTERVAL_MS = 20 * 1000;
 const BALANCE_REFRESH_INTERVAL_MS = 55 * 1000;
+const LATEST_VERSION_REFRESH_INTERVAL_MS = 60 * 60 * 1000;
 
 export function useLocalStorage<T>(key: string, initialValue: T) {
   const [storedValue, setStoredValue] = React.useState<T>(() => {
@@ -254,4 +257,14 @@ export function useCxoBalance({
     }
   );
   return { balance: data, error };
+}
+
+const RELEASES_API_URL =
+  'https://api.github.com/repos/cargox-holding/cxo-relay/releases/latest';
+
+export function useLatestVersion() {
+  const { data: latestRelease } = useSWR(RELEASES_API_URL, getLatestRelease, {
+    refreshInterval: LATEST_VERSION_REFRESH_INTERVAL_MS,
+  });
+  return latestRelease ? (latestRelease as LatestReleaseDto).name : undefined;
 }

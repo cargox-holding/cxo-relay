@@ -27,6 +27,7 @@
   "dependencies": {
     "clsx": "^1.2.1",
     "commander": "^9.4.0",
+    "compare-versions": "^5.0.1",
     "ethers": "^5.6.9",
     "ink": "^3.2.0",
     "node-cache": "^5.1.2",

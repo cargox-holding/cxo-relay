@@ -1,0 +1,15 @@
+@import 'styles/variables';
+
+.version {
+  position: absolute;
+  bottom: $default-spacing;
+  right: $default-spacing;
+}
+
+.updateButton {
+  background-color: $color-orange;
+  border: none;
+  border-radius: $small-border-radius;
+  padding: $xxxsmall-spacing;
+  cursor: pointer;
+}
