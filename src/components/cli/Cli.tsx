@@ -11,6 +11,7 @@ import {
 import { isValidMnemonicOrPrivateKey } from '../../utils/validations';
 import { Balance } from './balance';
 import { Logs } from './logs';
+import { Version } from './version';
 
 type Props = {
   privateKeyOrMnemonic: string;
@@ -65,6 +66,7 @@ const App = ({
   }
   return (
     <Box flexDirection="column" marginLeft={2}>
+      <Version />
       <Box
         borderStyle="single"
         flexDirection="column"

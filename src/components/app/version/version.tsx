@@ -1,7 +1,5 @@
 import React from 'react';
-import { compare } from 'compare-versions';
 import styles from './styles.module.scss';
-import { version as currentVersion } from '../../../../package.json';
 import { useLatestVersion } from '../../../utils/hooks';
 
 const RELEASE_DOWNLOAD_LINK =
@@ -13,11 +11,7 @@ function openDownloadPage() {
 }
 
 export function Version() {
-  const latestVersion = useLatestVersion();
-  let newerAvailable = false;
-  if (latestVersion) {
-    newerAvailable = compare(latestVersion, currentVersion, '>');
-  }
+  const { newerAvailable, currentVersion } = useLatestVersion();
   return (
     <div className={styles.version}>
       v{currentVersion}{' '}

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import useSWR from 'swr';
 import { ethers } from 'ethers';
+import { compare } from 'compare-versions';
 import {
   getBalance,
   getCXOBalance,
@@ -12,6 +13,7 @@ import {
 } from '../api';
 import { LogsContext } from '../context/logs';
 import { processSignatures } from './process-signatures';
+import { version as currentVersion } from '../../package.json';
 
 const RELAY_REFRESH_INTERVAL_MS = 20 * 1000;
 const BALANCE_REFRESH_INTERVAL_MS = 55 * 1000;
@@ -263,8 +265,13 @@ const RELEASES_API_URL =
   'https://api.github.com/repos/cargox-holding/cxo-relay/releases/latest';
 
 export function useLatestVersion() {
-  const { data: latestRelease } = useSWR(RELEASES_API_URL, getLatestRelease, {
+  const { data } = useSWR(RELEASES_API_URL, getLatestRelease, {
     refreshInterval: LATEST_VERSION_REFRESH_INTERVAL_MS,
   });
-  return latestRelease ? (latestRelease as LatestReleaseDto).name : undefined;
+  let newerAvailable = false;
+  const latestVersion = data ? (data as LatestReleaseDto).name : undefined;
+  if (latestVersion) {
+    newerAvailable = compare(latestVersion, currentVersion, '>');
+  }
+  return { newerAvailable, currentVersion, latestVersion };
 }
