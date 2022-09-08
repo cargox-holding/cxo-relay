@@ -1,5 +1,5 @@
 import styles from './styles.module.scss';
-import React, { HTMLInputTypeAttribute } from 'react';
+import { HTMLInputTypeAttribute } from 'react';
 import clsx from 'clsx';
 import { UseFormRegisterReturn } from 'react-hook-form';
 

@@ -1,5 +1,4 @@
 import styles from './styles.module.scss';
-import React from 'react';
 
 interface BalanceProps {
   title: string;

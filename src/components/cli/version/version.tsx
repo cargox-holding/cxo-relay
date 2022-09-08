@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box, Text } from 'ink';
 import { useLatestVersion } from '../../../utils/hooks';
 

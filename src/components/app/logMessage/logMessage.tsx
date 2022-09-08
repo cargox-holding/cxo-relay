@@ -1,5 +1,4 @@
 import styles from './styles.module.scss';
-import React from 'react';
 import { LogEntry } from '../../../context/logs';
 
 export function LogMessage({ timestamp, message, level }: LogEntry) {

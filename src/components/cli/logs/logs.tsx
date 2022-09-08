@@ -1,4 +1,3 @@
-import React from 'react';
 import { LogMessage } from '../logMessage';
 import { useLogs } from '../../../utils/hooks';
 import { Box, Text } from 'ink';
