@@ -5,40 +5,85 @@
 /************************/
 
 .button {
-  background-color: $color-secondary;
   border: none;
   border-radius: $default-border-radius;
   padding: $small-spacing $default-spacing;
-  color: white;
   font-size: $xlarge-font-size;
   font-weight: 700;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   cursor: pointer;
+  transition: all $default-animation;
+
+  &::before {
+    transition: all $default-animation;
+    transform: scale(1);
+    width: $xlarge-font-size;
+    height: $xlarge-font-size;
+    margin-right: $small-spacing;
+    position: relative;
+  }
+
+  &:hover {
+    background-color: darken($color-secondary,5%);
+  }
+}
+
+.buttonSmall {
+  padding: $xsmall-spacing $small-spacing;
+  font-size: $default-font-size;
+}
+
+.buttonWhite {
+  background-color: white;
+  color: $color-primary;
+
+  &:hover {
+    background-color: darken(white,5%);
+  }
+}
+
+.buttonOrange {
+  background-color: $color-secondary;
+  color: white;
+
+  &:hover {
+    background-color: darken($color-secondary,5%);
+  }
 }
 
 .buttonGreen {
   background-color: $color-green;
+  color: white;
 
   &::before {
-    background: url('play.svg') no-repeat center center;
-    position: relative;
     content: '';
-    width: $xlarge-font-size;
-    height: $xlarge-font-size;
-    margin-right: $small-spacing;
+    background: url('play.svg') no-repeat center center;
+  }
+
+  &:hover {
+    background-color: darken($color-green,5%);
+
+    &::before {
+      transform: scale(1.25);
+    }
   }
 }
 
 .buttonRed {
   background-color: $color-red;
+  color: white;
 
   &::before {
-    background: url('stop.svg') no-repeat center center;
-    position: relative;
     content: '';
-    width: $xlarge-font-size;
-    height: $xlarge-font-size;
-    margin-right: $small-spacing;
+    background: url('stop.svg') no-repeat center center;
+  }
+
+  &:hover {
+    background-color: darken($color-red,5%);
+
+    &::before {
+      transform: scale(1.25);
+    }
   }
 }
