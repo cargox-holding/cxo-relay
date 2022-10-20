@@ -45,7 +45,7 @@ export async function processSignatures({
   if (gasPrice) {
     callOptions = {
       maxFeePerGas: parseUnits(gasPrice, 'gwei'),
-      gasLmaxPriorityFeePerGasimit: parseUnits(gasPrice, 'gwei'),
+      maxPriorityFeePerGas: parseUnits(gasPrice, 'gwei'),
     };
   } else {
     writeLog.info('Fetching gas price information...');
