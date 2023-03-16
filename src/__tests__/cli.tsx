@@ -23,6 +23,8 @@ test('display --help', async () => {
       --rewardAddr <address>  The address where CXO are stored on the Polygon
                               network (and where the reward will be sent to)
       --gas <price>           Custom gas price
+      --gascap <price>        Custom gas price cap
+      --doffa                 Proccess free for all documents
       -h, --help              display help for command
     "
   `);
@@ -88,6 +90,8 @@ test('start processing', async () => {
         rpcAddress={testData.polygonNodeURL}
         rewardCxoAddress={testData.rewardAddress}
         gasPrice={''}
+        gasPriceCap={''}
+        doffa={false}
       />
     </Wrapper>
   );

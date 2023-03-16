@@ -23,6 +23,8 @@ type Props = {
   rpcAddress: string;
   relayUrl: string;
   gasPrice: string;
+  gasPriceCap: string;
+  doffa: boolean;
   onStop: () => void;
 };
 
@@ -32,6 +34,8 @@ const ProcessScreen = ({
   rpcAddress,
   relayUrl,
   gasPrice,
+  gasPriceCap,
+  doffa,
   onStop,
 }: Props) => {
   // Clear logs on each session
@@ -61,6 +65,8 @@ const ProcessScreen = ({
     wallet,
     provider,
     gasPrice,
+    gasPriceCap,
+    doffa,
   });
 
   // These two hooks periodically check the MATIC and CXO balances

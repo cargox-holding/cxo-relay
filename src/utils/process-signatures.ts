@@ -1,6 +1,4 @@
-import { getGasPrice } from '../api';
-import { ethers, Transaction } from 'ethers';
-import { parseUnits } from 'ethers/lib/utils';
+import { BigNumber, ethers, Transaction } from 'ethers';
 import { LogsContextInterface } from '../context/logs';
 import { SignatureDto } from './hooks';
 import RelayCache from './relay-cache';
@@ -11,8 +9,8 @@ type ProcessInput = {
   provider: ethers.providers.Provider | null;
   writeLog: LogsContextInterface['writeLog'];
   shouldCancel: React.MutableRefObject<boolean>;
-  relayUrl: string;
-  gasPrice?: string;
+  gasPriceGwei?: BigNumber;
+  doffa?: boolean;
 };
 
 type EthersError = {
@@ -25,8 +23,8 @@ export async function processSignatures({
   provider,
   writeLog,
   shouldCancel,
-  relayUrl,
-  gasPrice,
+  gasPriceGwei,
+  doffa,
 }: ProcessInput) {
   if (!signatures) {
     writeLog.info('No signatures, canceling.');
@@ -39,33 +37,6 @@ export async function processSignatures({
   if (!provider) {
     writeLog.info('No provider, canceling.');
     return;
-  }
-
-  let callOptions = {};
-  if (gasPrice) {
-    callOptions = {
-      maxFeePerGas: parseUnits(gasPrice, 'gwei'),
-      maxPriorityFeePerGas: parseUnits(gasPrice, 'gwei'),
-    };
-  } else {
-    writeLog.info('Fetching gas price information...');
-    let gasUrl = '/gas/';
-    if (relayUrl.endsWith('/')) {
-      gasUrl = 'gas/';
-    }
-    try {
-      const gasPrice = await getGasPrice(`${relayUrl}${gasUrl}`);
-      callOptions = {
-        maxFeePerGas: parseUnits(gasPrice.result.SafeGasPrice, 'gwei'),
-        maxPriorityFeePerGas: parseUnits(gasPrice.result.SafeGasPrice, 'gwei'),
-      };
-    } catch {
-      writeLog.info('Failed to fetch gas price information!');
-      callOptions = {
-        maxFeePerGas: parseUnits('50', 'gwei'),
-        maxPriorityFeePerGas: parseUnits('50', 'gwei'),
-      };
-    }
   }
 
   // We sort the signatures by times_shown (ascending)
@@ -83,6 +54,11 @@ export async function processSignatures({
       continue;
     }
 
+    if (!doffa && signature.times_shown > 0) {
+      writeLog.info('Skipping (free for all document) ' + signature.id);
+      continue;
+    }
+
     writeLog.info('Processing signature ' + signature.id);
     const cxoRelay = new ethers.Contract(
       signature.relay_address,
@@ -91,6 +67,12 @@ export async function processSignatures({
     );
     const cxoRelayWithSigner = cxoRelay.connect(wallet);
     writeLog.info('Sending transaction...');
+
+    const callOptions = {
+      maxFeePerGas: gasPriceGwei,
+      maxPriorityFeePerGas: gasPriceGwei,
+    };
+
     try {
       const tx = await cxoRelayWithSigner.relayCall(
         signature.from,

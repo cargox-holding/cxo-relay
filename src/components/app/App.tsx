@@ -10,6 +10,7 @@ import { useLocalStorage } from '../../utils/hooks';
 
 const App = () => {
   const autostartChecked = useRef<boolean>(false);
+  const doffaChecked = useRef<boolean>(false);
   const [running, setRunning] = useState(false);
 
   // We store the user's submitted form values
@@ -21,7 +22,9 @@ const App = () => {
       rpcAddress: '',
       relayUrl: '',
       gasPrice: '',
+      gasPriceCap: '',
       autostart: false,
+      doffa: false,
     }
   );
 
@@ -44,6 +47,7 @@ const App = () => {
               initialValues={savedValues}
               onStart={startProcessing}
               autostartChecked={autostartChecked}
+              doffaChecked={doffaChecked}
             />
           ) : (
             <ProcessScreen {...savedValues} onStop={stopProcessing} />

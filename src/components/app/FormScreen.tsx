@@ -16,13 +16,16 @@ export type FormValues = {
   rpcAddress: string;
   relayUrl: string;
   gasPrice: string;
+  gasPriceCap: string;
   autostart: boolean;
+  doffa: boolean;
 };
 
 type Props = {
   initialValues: FormValues;
   onStart: (values: FormValues) => void;
   autostartChecked: React.MutableRefObject<boolean>;
+  doffaChecked: React.MutableRefObject<boolean>;
 };
 
 const FormScreen = ({ initialValues, onStart, autostartChecked }: Props) => {
@@ -160,9 +163,24 @@ const FormScreen = ({ initialValues, onStart, autostartChecked }: Props) => {
           />
           <FormGroup
             {...getFormGroupProps({
+              name: 'gasPriceCap',
+              label: 'Custom gas price cap (in gwei)',
+              helpText:
+                'Enter your custom gas price cap here. If required gas is higher, relaying will be paused.',
+            })}
+          />
+          <FormGroup
+            {...getFormGroupProps({
               name: 'autostart',
               type: 'checkbox',
               label: 'Autostart when opening the app',
+            })}
+          />
+          <FormGroup
+            {...getFormGroupProps({
+              name: 'doffa',
+              type: 'checkbox',
+              label: 'Proccess free for all documents',
             })}
           />
           <button

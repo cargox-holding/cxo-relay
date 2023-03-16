@@ -1,15 +1,12 @@
 {
   "name": "cxo-relay",
   "productName": "CXO Relayer",
-  "private": false,
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "CXO Relayer App",
   "author": "CargoX Holding LTD",
   "license": "MIT",
   "main": "dist/electron/main/index.js",
-  "bin": {
-    "cxo-relay": "dist-cli/src/main-cli.js"
-  },
+  "bin": "dist-cli/src/main-cli.js",
   "files": [
     "dist-cli/*"
   ],
@@ -91,6 +88,7 @@
     "workerDirectory": "public"
   },
   "volta": {
-    "node": "14.18.0"
+    "node": "14.18.0",
+    "yarn": "4.0.0-rc.40"
   }
 }

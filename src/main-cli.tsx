@@ -25,7 +25,9 @@ program
     '--rewardAddr <address>',
     'The address where CXO are stored on the Polygon network (and where the reward will be sent to)'
   )
-  .option('--gas <price>', 'Custom gas price');
+  .option('--gas <price>', 'Custom gas price')
+  .option('--gascap <price>', 'Custom gas price cap')
+  .option('--doffa', 'Proccess free for all documents');
 
 program.parse();
 const options = program.opts();
@@ -38,6 +40,8 @@ render(
       rpcAddress={options['rpcUrl']}
       rewardCxoAddress={options['rewardAddr']}
       gasPrice={options['gas']}
+      gasPriceCap={options['gascap']}
+      doffa={options['doffa']}
     />
   </LogsProvider>
 );

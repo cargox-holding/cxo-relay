@@ -12,8 +12,10 @@ import {
   RelayConstantsDto,
 } from '../api';
 import { LogsContext } from '../context/logs';
+import { getGasPrice } from '../api';
 import { processSignatures } from './process-signatures';
 import { version as currentVersion } from '../../package.json';
+import { parseUnits } from 'ethers/lib/utils';
 
 const RELAY_REFRESH_INTERVAL_MS = 20 * 1000;
 const BALANCE_REFRESH_INTERVAL_MS = 55 * 1000;
@@ -142,6 +144,8 @@ type RunnerInput = {
   wallet: ethers.Wallet | null;
   provider: ethers.providers.Provider | null;
   gasPrice: string;
+  gasPriceCap: string;
+  doffa: boolean;
 };
 
 export function useRunner({
@@ -150,6 +154,8 @@ export function useRunner({
   wallet,
   provider,
   gasPrice,
+  gasPriceCap,
+  doffa,
 }: RunnerInput) {
   const { writeLog } = useLogs();
 
@@ -158,6 +164,10 @@ export function useRunner({
 
   // Flag to "notify" the processSignatures function to stop processing
   const shouldCancel = React.useRef(false);
+
+  let gasPriceGwei = parseUnits('50', 'gwei');
+  let gasPriceCapGwei = parseUnits('0', 'gwei');
+
   function cancel() {
     shouldCancel.current = true;
   }
@@ -169,6 +179,32 @@ export function useRunner({
     }
 
     async function fetchAndProcess() {
+      if (gasPriceCap !== '' && gasPriceCap !== '0') {
+        gasPriceCapGwei = parseUnits(gasPriceCap, 'gwei');
+      }
+
+      if (gasPrice) {
+        gasPriceGwei = parseUnits(gasPrice, 'gwei');
+      } else {
+        writeLog.info('Fetching gas price information...');
+
+        let gasUrl = '/gas/';
+        if (relayUrl.endsWith('/')) {
+          gasUrl = 'gas/';
+        }
+        try {
+          const gasPriceAPI = await getGasPrice(`${relayUrl}${gasUrl}`);
+
+          gasPriceGwei = parseUnits(gasPriceAPI.result.SafeGasPrice, 'gwei');
+        } catch {
+          writeLog.info('Failed to fetch gas price information!');
+
+          // if we fail to fetch gas price, force pause
+          gasPriceGwei = parseUnits('0', 'gwei');
+          gasPriceCapGwei = parseUnits('1', 'gwei');
+        }
+      }
+
       let signatures: SignatureDto[] = [];
 
       try {
@@ -185,6 +221,17 @@ export function useRunner({
         return;
       }
 
+      if (
+        gasPriceCapGwei > parseUnits('0', 'gwei') &&
+        gasPriceGwei > gasPriceCapGwei
+      ) {
+        writeLog.info(
+          'Gas price is higher than gas price cap. Relaying is paused.'
+        );
+
+        return;
+      }
+
       if (signatures.length > 0) {
         writeLog.info('Fetched ' + signatures.length + ' signature(s)...');
         // New signatures available, so we process them with the runner
@@ -193,10 +240,10 @@ export function useRunner({
           signatures,
           wallet,
           provider,
-          gasPrice,
           writeLog,
-          relayUrl,
           shouldCancel,
+          gasPriceGwei,
+          doffa,
         });
         inProgress.current = false;
       }
