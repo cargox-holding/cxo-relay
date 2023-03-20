@@ -180,7 +180,7 @@ export function useRunner({
 
     async function fetchAndProcess() {
       if (gasPriceCap !== '' && gasPriceCap !== '0') {
-        gasPriceCapGwei = parseUnits(gasPriceCap, 'gwei');
+        gasPriceCapGwei = parseUnits(gasPriceCap + '', 'gwei');
       }
 
       if (gasPrice) {
@@ -222,11 +222,12 @@ export function useRunner({
       }
 
       if (
-        gasPriceCapGwei > parseUnits('0', 'gwei') &&
-        gasPriceGwei > gasPriceCapGwei
+        gasPriceCap !== '' &&
+        gasPriceCap !== '0' &&
+        gasPriceGwei.gte(gasPriceCapGwei)
       ) {
         writeLog.info(
-          'Gas price is higher than gas price cap. Relaying is paused.'
+          'Gas price is higher than gas price cap. Relaying is paused. '
         );
 
         return;
