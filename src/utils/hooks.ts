@@ -180,7 +180,7 @@ export function useRunner({
 
     async function fetchAndProcess() {
       if (gasPriceCap !== '' && gasPriceCap !== '0') {
-        gasPriceCapGwei = parseUnits(gasPriceCap + '', 'gwei');
+        gasPriceCapGwei = parseUnits(gasPriceCap, 'gwei');
       }
 
       if (gasPrice) {
