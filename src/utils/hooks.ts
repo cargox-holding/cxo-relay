@@ -179,9 +179,11 @@ export function useRunner({
     }
 
     async function fetchAndProcess() {
-      if (gasPriceCap !== '' && gasPriceCap !== '0') {
-        gasPriceCapGwei = parseUnits(gasPriceCap, 'gwei');
+      if (gasPriceCap === '') {
+        gasPriceCap = '0';
       }
+
+      gasPriceCapGwei = parseUnits(gasPriceCap, 'gwei');
 
       if (gasPrice) {
         gasPriceGwei = parseUnits(gasPrice, 'gwei');
