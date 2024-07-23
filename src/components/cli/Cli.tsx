@@ -20,6 +20,7 @@ type Props = {
   gasPrice: string;
   gasPriceCap: string;
   doffa: boolean;
+  refresh: string;
 };
 
 const App = ({
@@ -30,6 +31,7 @@ const App = ({
   gasPrice = '',
   gasPriceCap = '',
   doffa = false,
+  refresh = '20',
 }: Props) => {
   // These two hooks establish the provider and wallet objects that used throughout the component
   const provider = useRpcProvider({ rpcAddress });
@@ -54,6 +56,7 @@ const App = ({
     gasPrice,
     gasPriceCap,
     doffa,
+    refresh,
   });
 
   // These two hooks periodically check the MATIC and CXO balances

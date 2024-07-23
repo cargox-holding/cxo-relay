@@ -25,6 +25,7 @@ const App = () => {
       gasPriceCap: '',
       autostart: false,
       doffa: false,
+      refresh: '20',
     }
   );
 

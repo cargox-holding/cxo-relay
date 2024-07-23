@@ -25,6 +25,7 @@ test('display --help', async () => {
       --gas <price>           Custom gas price
       --gascap <price>        Custom gas price cap
       --doffa                 Proccess free for all documents
+      --refresh               Refresh rate. Results are cached for 1 minute, so hitting API more than that will not bring better results.
       -h, --help              display help for command
     "
   `);
@@ -92,6 +93,7 @@ test('start processing', async () => {
         gasPrice={''}
         gasPriceCap={''}
         doffa={false}
+        refresh={'20'}
       />
     </Wrapper>
   );

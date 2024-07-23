@@ -19,6 +19,7 @@ export type FormValues = {
   gasPriceCap: string;
   autostart: boolean;
   doffa: boolean;
+  refresh: string;
 };
 
 type Props = {
@@ -181,6 +182,14 @@ const FormScreen = ({ initialValues, onStart, autostartChecked }: Props) => {
               name: 'doffa',
               type: 'checkbox',
               label: 'Proccess free for all documents',
+            })}
+          />
+          <FormGroup
+            {...getFormGroupProps({
+              name: 'refresh',
+              label: 'Refresh rate (in seconds)',
+              helpText:
+                'Results are cached for 1 minute, so hitting API more than that will not bring better results.',
             })}
           />
           <button

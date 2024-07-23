@@ -17,7 +17,6 @@ import { processSignatures } from './process-signatures';
 import { version as currentVersion } from '../../package.json';
 import { parseUnits } from 'ethers/lib/utils';
 
-const RELAY_REFRESH_INTERVAL_MS = 20 * 1000;
 const BALANCE_REFRESH_INTERVAL_MS = 55 * 1000;
 const LATEST_VERSION_REFRESH_INTERVAL_MS = 60 * 60 * 1000;
 
@@ -146,6 +145,7 @@ type RunnerInput = {
   gasPrice: string;
   gasPriceCap: string;
   doffa: boolean;
+  refresh: string;
 };
 
 export function useRunner({
@@ -156,6 +156,7 @@ export function useRunner({
   gasPrice,
   gasPriceCap,
   doffa,
+  refresh,
 }: RunnerInput) {
   const { writeLog } = useLogs();
 
@@ -253,7 +254,11 @@ export function useRunner({
     }
 
     // Setup interval and run immediately
-    const fetchTimer = setInterval(fetchAndProcess, RELAY_REFRESH_INTERVAL_MS);
+    if (Number.isNaN(Number(refresh)) || Number(refresh) < 1) {
+      refresh = '20';
+    }
+
+    const fetchTimer = setInterval(fetchAndProcess, Number(refresh) * 1000);
     fetchAndProcess();
 
     return () => {

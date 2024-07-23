@@ -27,7 +27,11 @@ program
   )
   .option('--gas <price>', 'Custom gas price')
   .option('--gascap <price>', 'Custom gas price cap')
-  .option('--doffa', 'Proccess free for all documents');
+  .option('--doffa', 'Proccess free for all documents')
+  .option(
+    '--refresh <refresh>',
+    'Refresh rate. Results are cached for 1 minute, so hitting API more than that will not bring better results.'
+  );
 
 program.parse();
 const options = program.opts();
@@ -42,6 +46,7 @@ render(
       gasPrice={options['gas']}
       gasPriceCap={options['gascap']}
       doffa={options['doffa']}
+      refresh={options['refresh']}
     />
   </LogsProvider>
 );

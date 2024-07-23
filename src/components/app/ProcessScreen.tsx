@@ -25,6 +25,7 @@ type Props = {
   gasPrice: string;
   gasPriceCap: string;
   doffa: boolean;
+  refresh: string;
   onStop: () => void;
 };
 
@@ -36,6 +37,7 @@ const ProcessScreen = ({
   gasPrice,
   gasPriceCap,
   doffa,
+  refresh,
   onStop,
 }: Props) => {
   // Clear logs on each session
@@ -67,6 +69,7 @@ const ProcessScreen = ({
     gasPrice,
     gasPriceCap,
     doffa,
+    refresh,
   });
 
   // These two hooks periodically check the MATIC and CXO balances
